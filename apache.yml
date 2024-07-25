@@ -1,8 +1,15 @@
 ---
-- name: Install Apache on RHEL 8
+- name: Ensure DNS is configured and install Apache on RHEL 8
   hosts: localhost
   become: yes
   tasks:
+    - name: Update resolv.conf to use Google DNS
+      lineinfile:
+        path: /etc/resolv.conf
+        state: present
+        line: "nameserver 8.8.8.8"
+        backup: yes
+
     - name: Install Apache
       yum:
         name: httpd
