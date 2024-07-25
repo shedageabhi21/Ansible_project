@@ -1,0 +1,7 @@
+---
+- name: Print success message
+  hosts: localhost
+  tasks:
+    - name: Print Success
+      debug:
+        msg: "Success!"
