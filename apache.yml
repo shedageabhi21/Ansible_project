@@ -1,6 +1,6 @@
 ---
 - name: Ensure DNS is configured and install Apache on RHEL 8
-  hosts: 192.168.50.132
+  hosts: all
   become: yes
   tasks:
     - name: Update resolv.conf to use Google DNS
