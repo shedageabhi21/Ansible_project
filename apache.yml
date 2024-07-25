@@ -1,0 +1,22 @@
+---
+- name: Install Apache on RHEL 8
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: present
+
+    - name: Start and enable Apache service
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Ensure firewall is allowing HTTP traffic
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
