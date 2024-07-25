@@ -1,6 +1,6 @@
 ---
 - name: Install Apache on RHEL 8
-  hosts: webservers
+  hosts: localhost
   become: yes
   tasks:
     - name: Install Apache
