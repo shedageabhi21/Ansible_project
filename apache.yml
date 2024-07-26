@@ -7,6 +7,9 @@
       yum:
         name: httpd
         state: present
+      tags:
+        - install
+        - ngin
 
     - name: Start and enable Apache service
       service:
