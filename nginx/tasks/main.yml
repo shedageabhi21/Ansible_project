@@ -1,0 +1,14 @@
+
+# tasks file for nginx
+---
+- name: Install Nginx
+  ansible.builtin.yum:
+    name: "{{ nginx_package_name }}"
+    state: present
+
+- name: Start and enable Nginx service
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: started
+    enabled: yes
+
