@@ -9,7 +9,7 @@
         state: present
 
     - name: Start and enable Apache service
-      systemd:
+      service:
         name: httpd
         state: started
         enabled: yes
