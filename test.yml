@@ -1,1 +1,9 @@
 ---
+- hosts: app_servers
+  tasks:
+    - name: Gather facts from db servers
+      ansible.builtin.setup:
+        filter:
+          - 'ansible_distribution'
+          - 'ansible_machine_id'
+          - 'ansible_*_mb
