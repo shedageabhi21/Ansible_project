@@ -1,0 +1,7 @@
+
+# tasks file for python
+# python_install/tasks/main.yml
+---
+- import_tasks: install_py.yml
+- import_tasks: check_install.yml
+

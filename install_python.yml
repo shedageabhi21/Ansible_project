@@ -1,0 +1,5 @@
+---
+- name: install the python package
+  hosts: all
+  roles:
+    - python

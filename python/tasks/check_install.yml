@@ -1,0 +1,8 @@
+- name: Verify Python installation
+  command: "python{{ python_version }} --version"
+  register: python_version_output
+  become: yes
+
+- name: Print Python version
+  debug:
+    msg: "Python version installed: {{ python_version_output.stdout }}"

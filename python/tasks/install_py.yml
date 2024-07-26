@@ -1,0 +1,5 @@
+- name: Ensure Python is installed
+  yum:
+    name: "python{{ python_version }}"
+    state: present
+  become: yes
