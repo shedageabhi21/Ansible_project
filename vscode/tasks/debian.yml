@@ -1,0 +1,21 @@
+---
+- name: Install prerequisites for Debian-based systems
+  apt:
+    name:
+      - wget
+      - gpg
+    state: present
+  become: yes
+
+- name: Add VS Code repository for Debian-based systems
+  apt_repository:
+    repo: ppa:ubuntu-desktop/ubuntu-make
+    state: present
+  become: yes
+
+- name: Install Visual Studio Code for Debian-based systems
+  apt:
+    name: code
+    state: present
+  become: yes
+

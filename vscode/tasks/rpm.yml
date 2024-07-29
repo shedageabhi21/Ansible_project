@@ -1,0 +1,32 @@
+---
+
+ - name: Install prerequisites for RPM-based systems
+   yum:
+     name:
+       - wget
+       - gpg
+     state: present
+
+ - name: Download GPG key Code repository for RPM-based systems
+   command: curl -o /tmp/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
+   args:
+     warn: false
+
+ - name: Add VS code GPG Key
+   rpm_key:
+     state: present
+     key: /tmp/microsoft.asc
+
+ - name: Add VS Code repo for RPM-based systems
+   yum_repository:
+     name: vscode
+     description: Visual Studio Code
+     baseurl: https://packages.microsoft.com/yumrepos/vscode
+     enabled: yes
+     gpgcheck: yes
+
+ - name: Install Visual Studio Code for RPM-based systems
+   yum:
+     name: code
+     state: present
+
