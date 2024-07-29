@@ -1,0 +1,8 @@
+---
+
+- name: Install mysql 
+  hosts: prod
+  become: yes
+  roles:
+    - mysql
+

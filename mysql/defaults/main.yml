@@ -1,0 +1,6 @@
+---
+mysql_root_password: "root"
+mysql_db_name: "FirstDB"
+mysql_db_user: "shubham"
+mysql_db_password: "root"
+
