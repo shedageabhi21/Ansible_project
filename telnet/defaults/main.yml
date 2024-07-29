@@ -1,0 +1,13 @@
+---
+# defaults file for telnet
+
+#for the rpm packages:
+telnet_package: "telnet"
+telnet_server_package: "telnet-server"
+
+
+#for the debian packages:
+telnet_package_debian: "telnetd"
+telnet_server_package_debian: "openbsd-inetd"
+
+

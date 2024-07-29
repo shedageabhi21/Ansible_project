@@ -1,0 +1,22 @@
+# install_telnet/tasks/install_rpm.yml
+---
+- name: Install Telnet on Red Hat-based systems
+  yum:
+    name: "{{ telnet_package }}"
+    state: present
+  become: yes
+
+- name: Install telnet server package on RPM-based systems
+  ansible.builtin.yum:
+    name: "{{  telnet_server_package }}"
+    state: present
+  become: yes
+
+- name: Ensure telnet service is enabled
+  ansible.builtin.service:
+    name: "telnet.socket"
+    enabled: yes
+    state: started
+  become: yes
+
+

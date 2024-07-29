@@ -1,0 +1,21 @@
+# install_telnet/tasks/debian.yml
+---
+- name: Install Telnet on Debian-based systems
+  apt:
+    name: "{{ telnet_package_debian }}"
+    state: present
+  become: yes
+
+- name: Install telnet server package on RPM-based systems
+  ansible.builtin.apt:
+    name: "{{ telnet_server_package_debian }}"
+    state: present
+  become: yes
+
+- name: Ensure telnet service is enabled
+  ansible.builtin.service:
+    name: "{{ telnet_server_package_debian }}"
+    enabled: yes
+    state: started
+  become: true
+

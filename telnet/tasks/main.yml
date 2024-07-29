@@ -1,0 +1,10 @@
+---
+# tasks file for telnet
+- name: install for the debian
+  include_tasks: install_debian.ym
+  when: ansible_os_family == "Debian"
+
+- name: install for the debian
+  include_tasks: install_rpm.yml
+  when: ansible_os_family == "RedHat"
+ 

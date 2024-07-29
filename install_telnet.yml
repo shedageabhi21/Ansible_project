@@ -1,0 +1,5 @@
+---
+- name: install the telnet package
+  hosts: all
+  roles:
+    - telnet

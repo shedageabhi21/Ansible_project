@@ -1,0 +1,6 @@
+---
+# defaults file for telnet
+
+
+telnet_package: "telnet"
+telnet_server_package: "telnet-server"
