@@ -1,0 +1,6 @@
+---
+  - name: Install docker
+    hosts: prod
+    become: yes
+    roles:
+      - docker
