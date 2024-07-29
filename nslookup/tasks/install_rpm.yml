@@ -1,0 +1,6 @@
+---
+- name: Install nslookup on RPM-based systems
+  ansible.builtin.yum:
+    name: "{{ nslookup_package_rpm }}"
+    state: present
+

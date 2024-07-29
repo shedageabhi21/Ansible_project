@@ -1,0 +1,8 @@
+---
+# defaults file for nslookup
+# Default variables for nslookup installation
+
+# Package names
+nslookup_package_debian: dnsutils
+nslookup_package_rpm: bind-utils
+

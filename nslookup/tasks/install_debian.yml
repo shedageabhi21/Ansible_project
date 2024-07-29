@@ -1,0 +1,7 @@
+---
+- name: Install nslookup on Debian-based systems
+  ansible.builtin.apt:
+    name: "{{ nslookup_package_debian }}"
+    state: present
+    update_cache: yes
+

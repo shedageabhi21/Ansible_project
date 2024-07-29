@@ -1,0 +1,9 @@
+---
+# tasks file for nslookup
+- name: install for the rpm-based system
+  ansible.builtin.include_tasks: install_rpm.yml
+  when: ansible_facts['os_family'] == "RedHat"
+
+- name: Include tasks for Debian-based systems
+  ansible.builtin.include_tasks: install_debian.yml
+  when: ansible_facts['os_family'] == "Debian"
