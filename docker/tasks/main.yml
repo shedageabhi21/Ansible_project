@@ -1,0 +1,46 @@
+---
+# tasks file for docker
+
+- name: Add Docker CE repository
+  yum_repository:
+    name: docker-ce
+    description: Docker CE Repository
+    baseurl: https://download.docker.com/linux/fedora/38/x86_64/
+    gpgcheck: 1
+    gpgkey: https://download.docker.com/linux/fedora/gpg
+    enabled: 1
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+
+- name: Ensure Docker is installed on RedHat-based systems
+  yum:
+    name: docker
+    state: present
+  become: yes
+  when: ansible_os_family == "RedHat"
+
+- name: Ensure Docker service is started and enabled
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  become: yes
+
+
+- name: Create Docker group
+  group:
+    name: docker
+    state: present
+
+
+- name: Add user to Docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+
+- name: Apply new group membership
+  command: newgrp docker
+  become: no
+

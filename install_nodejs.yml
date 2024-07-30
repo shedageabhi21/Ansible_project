@@ -1,0 +1,7 @@
+---
+- name: Install Node.js on managed servers
+  hosts: prod
+  become: yes
+  roles:
+    - nodejs
+

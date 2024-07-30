@@ -1,0 +1,8 @@
+---
+- name: Install Google Chrome on RedHat
+  include_tasks: rpm.yml
+  when: ansible_os_family == "RedHat"
+
+- name: Install Google Chrome on Debian
+  include_tasks: debian.yml
+  when: ansible_os_family == "Debian"

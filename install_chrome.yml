@@ -1,0 +1,8 @@
+---
+
+- name: Install Chrome browser
+  hosts: prod
+  become: yes
+  roles:
+    - chrome
+

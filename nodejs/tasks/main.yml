@@ -1,0 +1,23 @@
+---
+- name: Add NodeSource repository
+  ansible.builtin.yum_repository:
+    name: nodesource
+    description: Node.js Packages for Enterprise Linux
+    baseurl: "https://rpm.nodesource.com/pub_16.x/el/7/x86_64"
+    gpgcheck: yes
+    gpgkey: "https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL"
+  when: ansible_os_family == 'RedHat'
+
+- name: Install Node.js
+  ansible.builtin.yum:
+    name: nodejs
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+
+- name: Install Node.js
+  ansible.builtin.apt:
+    name: nodejs
+    state: latest
+    update_cache: yes
+  when: ansible_os_family == 'Debian'
