@@ -1,0 +1,5 @@
+---
+  - name: Upgrade Java version
+    hosts: prod
+    roles:
+      - Java-Upgrade

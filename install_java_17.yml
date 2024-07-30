@@ -1,0 +1,5 @@
+---
+  - name: Install Java 17
+    hosts: prod
+    roles:
+      - Java-17

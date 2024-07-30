@@ -1,0 +1,4 @@
+- name: Upgrade Java JDK
+  yum:
+    name: "{{ Java_upgraded_version }}"
+    state: latest

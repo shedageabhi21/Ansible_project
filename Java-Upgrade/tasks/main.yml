@@ -1,0 +1,8 @@
+---
+  - name: Upgrage java in debian
+    include_tasks: debian.yml
+    when: ansible_os_family == "Debian"
+
+  - name: Upgrade java in rpm
+    include_tasks: rpm.yml
+    when: ansible_os_family == "RedHat"
