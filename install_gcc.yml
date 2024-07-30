@@ -1,0 +1,5 @@
+---
+- name: Install the Gcc package
+  hosts: all
+  roles:
+    - gcc
