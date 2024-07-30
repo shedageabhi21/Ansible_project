@@ -1,0 +1,9 @@
+---
+# tasks file for network_packages
+
+- name: Install network packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ network_packages }}"
+

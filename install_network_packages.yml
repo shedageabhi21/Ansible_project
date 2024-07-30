@@ -1,0 +1,5 @@
+---
+- name: install the network packages
+  hosts: all
+  roles:
+    - network_packages
