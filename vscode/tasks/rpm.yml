@@ -8,9 +8,9 @@
      state: present
 
  - name: Download GPG key Code repository for RPM-based systems
-   command: curl -o /tmp/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
-   args:
-     warn: false
+   ansible.builtin.command:
+     cmd: curl -o /tmp/microsoft.asc https://packages.microsoft.com/keys/microsoft.asc
+
 
  - name: Add VS code GPG Key
    rpm_key:
