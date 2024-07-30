@@ -1,9 +1,9 @@
 ---
-# tasks file for network_packages
+- name: Install network packages on RPM-based systems
+  include_tasks: install_rpm.yml
+  when: ansible_os_family == "RedHat"
 
-- name: Install network packages
-  package:
-    name: "{{ item }}"
-    state: present
-  loop: "{{ network_packages }}"
+- name: Install network packages on Debian-based systems
+  include_tasks: install_debian.yml
+  when: ansible_os_family == "Debian"
 
