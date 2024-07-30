@@ -1,0 +1,57 @@
+---
+- name: Check if PostgreSQL is installed
+  shell: |
+    rpm -q postgresql-server
+  register: postgresql_installed
+  ignore_errors: yes
+
+- name: Debug PostgreSQL installation check
+  debug:
+    msg: "PostgreSQL installed check result: {{ postgresql_installed }}"
+
+- name: Stop PostgreSQL service
+  service:
+    name: postgresql
+    state: stopped
+  when: postgresql_installed.rc == 0
+
+- name: Disable PostgreSQL service
+  service:
+    name: postgresql
+    enabled: no
+  when: postgresql_installed.rc == 0
+
+- name: Uninstall PostgreSQL packages
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - postgresql
+    - postgresql-server
+    - postgresql-contrib
+    - postgresql-libs
+    - postgresql-client
+    - postgresql-devel
+  when: postgresql_installed.rc == 0
+
+- name: Remove PostgreSQL data directory
+  file:
+    path: /var/lib/pgsql
+    state: absent
+    recurse: yes
+  when: postgresql_installed.rc == 0
+
+- name: Remove PostgreSQL configuration files
+  file:
+    path: /etc/postgresql
+    state: absent
+    recurse: yes
+  when: postgresql_installed.rc == 0
+
+- name: Remove PostgreSQL log files
+  file:
+    path: /var/log/postgresql
+    state: absent
+    recurse: yes
+  when: postgresql_installed.rc == 0
+

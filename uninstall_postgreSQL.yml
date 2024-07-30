@@ -1,0 +1,5 @@
+---
+- name: uninstall the postgreSQL
+  hosts: all
+  roles:
+    - uninstall_postgreSQL
