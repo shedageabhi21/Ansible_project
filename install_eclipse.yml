@@ -1,0 +1,8 @@
+
+---
+- name: Install and set up Eclipse
+  hosts: prod
+  become: yes
+  roles:
+    - eclipse
+

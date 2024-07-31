@@ -1,0 +1,11 @@
+# roles/eclipse/tasks/debian.yml
+---
+- name: Ensure dependencies are installed (Debian)
+  apt:
+    name:
+      - wget
+      - tar
+      - curl
+    state: present
+  become: yes
+

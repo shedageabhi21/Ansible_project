@@ -1,0 +1,40 @@
+---
+- name: Include Debian specific tasks
+  include_tasks: debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: Include RedHat specific tasks
+  include_tasks: rpm.yml
+  when: ansible_os_family == "RedHat"
+
+- name: Copy Extracted Directoru to /opt/
+  copy:
+    src: /home/shubham/Downloads/eclipse-inst-jre-linux64/eclipse-installer
+    dest: /opt/
+    mode: '0755'
+    owner: shubham
+    group: shubham
+
+- name: Create symlink for Eclipse executable
+  file:
+    src: "/opt/eclipse-installer"
+    dest: "/usr/local/bin/eclipse-inst"
+    state: link
+  become: yes
+
+- name: Create Eclipse desktop entry
+  copy:
+    dest: /usr/share/applications/eclipse.desktop
+    content: |
+      [Desktop Entry]
+      Name=Eclipse IDE
+      Type=Application
+      Exec=/opt/eclipse/eclipse
+      Terminal=false
+      Icon=/opt/eclipse/icon.xpm
+      Comment=Integrated Development Environment
+      NoDisplay=false
+      Categories=Development;IDE;
+      Name[en]=eclipse.desktop
+  become: yes
+
