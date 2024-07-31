@@ -1,0 +1,7 @@
+---
+- name: Install OpenSSL on Debian-based systems
+  ansible.builtin.apt:
+    name: openssl
+    state: present
+    update_cache: yes
+

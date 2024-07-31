@@ -1,0 +1,6 @@
+---
+- name: Install OpenSSL on RPM-based systems
+  package:
+    name: openssl
+    state: present
+

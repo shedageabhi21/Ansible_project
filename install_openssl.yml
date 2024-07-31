@@ -1,0 +1,5 @@
+---
+- name: install the openssl
+  hosts: all
+  roles:
+    - openssl
