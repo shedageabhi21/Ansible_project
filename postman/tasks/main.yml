@@ -1,0 +1,36 @@
+---
+# Currently Due to 'customhttpconnection' error this role is unable to Download and Extract tar of the postman
+
+- name: Extract tar of postman
+  unarchive:
+    src: "{{ postman_tar_gz }}"
+    dest: /opt/
+
+- name: Create a symbolic link for Postman
+  file:
+    src: /opt/Postman/Postman
+    dest: /usr/local/bin/postman
+    state: link
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Create a desktop entry for Postman
+  copy:
+    dest: /usr/share/applications/postman.desktop
+    content: |
+      [Desktop Entry]
+      Version=1.0
+      Name=Postman
+      Exec=/opt/Postman/Postman
+      Icon=/opt/Postman/app/resources/app/assets/icon.png
+      Type=Application
+      Categories=Development;
+
+- name: Set permissions for Postman directory
+  file:
+    path: /opt/Postman
+    state: directory
+    owner: root
+    group: root
+    recurse: yes
