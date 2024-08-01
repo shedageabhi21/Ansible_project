@@ -15,7 +15,7 @@
 - name: Ensure remote_tmp directory is created
   become: yes
   file:
-    path: /opt/tomcat/.ansible/tmp
+    path: "{{ tomcat_home }}/.ansible/tmp"
     state: directory
     mode: 1777
   
@@ -48,7 +48,7 @@
 - name: "Move files to the {{ tomcat_home }} directory"
   become: yes
   become_user: tomcat
-  shell: "mv /opt/tomcat/apache*/* /opt/tomcat"
+  shell: "mv {{ tomcat_home }}/apache*/* {{ tomcat_home }}"
   ignore_errors: yes
 
 - name: Copy Tomcat systemd service file
