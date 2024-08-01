@@ -1,0 +1,7 @@
+---
+- name: Install JMeter on target servers
+  hosts: all
+  become: yes
+  roles:
+    - jmeter
+
