@@ -1,0 +1,70 @@
+---
+- name: Create Tomcat group
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+
+- name: Create Tomcat user
+  user:
+    name: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    home: "{{ tomcat_home }}"
+    shell: /bin/false
+    system: yes
+
+- name: Ensure remote_tmp directory is created
+  become: yes
+  file:
+    path: /opt/tomcat/.ansible/tmp
+    state: directory
+    mode: 1777
+  
+
+- name: Create Tomcat directory
+  file:
+    path: "{{ tomcat_home }}"
+    state: directory
+    mode: 0755
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+
+- name: Extract Tomcat (RPM)
+  unarchive:
+    src: "{{ tomcat_download_url }}"
+    dest: "{{ tomcat_home }}"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    remote_src: yes
+  ignore_errors: yes
+
+- name: Set permissions on Tomcat directory
+  file:
+    path: "{{ tomcat_home }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    recurse: yes
+ 
+- name: "Move files to the {{ tomcat_home }} directory"
+  become: yes
+  become_user: tomcat
+  shell: "mv /opt/tomcat/apache*/* /opt/tomcat"
+  ignore_errors: yes
+
+- name: Copy Tomcat systemd service file
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+    mode: '0644'
+
+- name: Reload the SystemD to re-read configuration
+  become: yes
+  systemd:
+    daemon-reload: yes
+
+- name: Start and enable Tomcat service
+  systemd: 
+    name: tomcat
+    state: started
+    enabled: yes
+

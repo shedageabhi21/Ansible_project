@@ -1,0 +1,7 @@
+---
+# tasks file for tomcat
+- name: check for java
+  ansible.builtin.include_tasks: check_java.yml
+  
+- name: install the tomcat
+  ansible.builtin.include_tasks: install_tomcat.yml
