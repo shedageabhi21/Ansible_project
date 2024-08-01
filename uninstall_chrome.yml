@@ -1,9 +1,9 @@
 ---
-- name: Chrome browser
+- name: Uninstall Chrome Browser
   hosts: all
   become: yes
   vars:
-    chrome_state: "present"
+    chrome_state: "absent"
   roles:
     - chrome
 

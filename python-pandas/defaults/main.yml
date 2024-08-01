@@ -1,0 +1,4 @@
+---
+# defaults file for python-pandas
+python_lib:
+  - pandas

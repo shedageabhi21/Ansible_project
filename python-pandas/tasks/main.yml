@@ -1,0 +1,7 @@
+---
+
+- name: Install pandas Python library
+  pip:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ python_lib }}"
