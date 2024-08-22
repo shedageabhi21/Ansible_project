@@ -1,6 +1,6 @@
 ---
 - name: Install Visual Studio Code
-  hosts: web
+  hosts: all
   become: yes
   tasks:
     - name: Include OS-specific role for Debian-based systems
