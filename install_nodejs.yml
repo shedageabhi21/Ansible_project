@@ -1,6 +1,6 @@
 ---
 - name: Install Node.js on managed servers
-  hosts: prod
+  hosts: all
   become: yes
   roles:
     - nodejs
