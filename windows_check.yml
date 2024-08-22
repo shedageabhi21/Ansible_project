@@ -1,0 +1,16 @@
+---
+name: checking for the windows
+hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Display Windows System Facts
+      debug:
+        msg: "Windows Version: {{ ansible_facts['os_family'] }} - {{ ansible_facts['distribution_version'] }}"
+
+    - name: Display Hostname
+      debug:
+        msg: "Hostname: {{ ansible_facts['fqdn'] }}"
+
+    - name: Display IP Addresses
+      debug:
+        msg: "IP Addresses: {{ ansible_facts['interfaces'] }}"
