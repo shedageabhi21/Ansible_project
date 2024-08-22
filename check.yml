@@ -1,6 +1,6 @@
 ---
 - name: Print success message
-  hosts: localhost
+  hosts: all
   tasks:
     - name: Print Success
       debug:
