@@ -26,5 +26,5 @@
         state: present
         username: "siba.kumar@prodevans.com"
         password: "Siba@1996"
-        pool_ids: 2c94ccdf900ca882019015f70fc719d0
+        pool_ids: "2c94ccdf900ca882019015f70fc719d0"
       when: repo_status.rc != 0
