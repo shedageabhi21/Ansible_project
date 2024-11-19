@@ -1,8 +1,8 @@
 ---
 - name: Validate and Confgure Redhat Subscription Managr
   hosts: all
-  collections:
-    - community.general
+  vars_files:
+    - subscription_manager.yml
   tasks:
     - name: Validate repository sync
       shell: subscription-manager status
@@ -24,9 +24,5 @@
       when: repo_status.rc == 0
 
     - name: Same as above but subscribe to a specific pool by ID.
-      community.general.redhat_subscription:
-        state: present
-        username: "siba.kumar@prodevans.com"
-        password: "Siba@1996"
-        pool_ids: "2c94ccdf900ca882019015f70fc719d0"
+      shell: subscription-manager register --username "{{ username }}" --password "{{ password }}" --auto-attach
       when: repo_status.rc != 0
