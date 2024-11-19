@@ -9,7 +9,7 @@
 
     - name: Print Repostatus
       debug:
-        var: subscription-manager status
+        var: repo_status
 
     - name: Print the subscription status
       debug:
