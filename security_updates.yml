@@ -1,6 +1,6 @@
 ---
 - name: Security Updates Playbook with User Confirmation
-  hosts: all
+  hosts: "{{ manage_node }}"
   become: yes
   tasks:
 
