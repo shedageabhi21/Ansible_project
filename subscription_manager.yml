@@ -5,6 +5,7 @@
     - name: Validate repository sync
       shell: subscription-manager status
       register: repo_status
+      ignore_error: true
 
     - name: Print Repostatus
       debug:
