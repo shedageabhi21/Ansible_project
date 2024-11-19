@@ -11,6 +11,11 @@
       debug:
         var: subscription-manager status
 
+    - name: Print the subscription status
+      debug:
+        msg: "System not register with subscription-manager"
+      when: repo_status.rc != 0
+
     #- name: Same as above but subscribe to a specific pool by ID.
     #  community.general.redhat_subscription:
     #    state: present
