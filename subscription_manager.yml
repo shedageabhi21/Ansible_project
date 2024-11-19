@@ -1,0 +1,18 @@
+---
+- name: Validate and Confgure Redhat Subscription Managr
+  hosts: all
+  tasks:
+    - name: Validate repository sync
+      shell: subscription-manager status
+      register: repo_status
+
+    - name: Print Repostatus
+      debug:
+        var: subscription-manager status
+
+    #- name: Same as above but subscribe to a specific pool by ID.
+    #  community.general.redhat_subscription:
+    #    state: present
+    #    username: 
+    #    password: somepass
+    #    pool_ids: 0123456789abcdef0123456789abcdef
