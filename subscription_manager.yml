@@ -1,6 +1,8 @@
 ---
 - name: Validate and Confgure Redhat Subscription Managr
   hosts: all
+  collections:
+    - community.general
   tasks:
     - name: Validate repository sync
       shell: subscription-manager status
