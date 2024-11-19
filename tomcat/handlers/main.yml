@@ -1,7 +1,7 @@
 ---
-# handlers file for tomcat
-- name: Restart tomcat
+# handlers file for httpd
+- name: Restart_httpd
   ansible.builtin.service:
-    name: tomcat
+    name: http
     state: restarted
   become: yes
