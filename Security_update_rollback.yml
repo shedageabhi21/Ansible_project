@@ -1,0 +1,34 @@
+---
+- name: Rollback Specific Security Updates Playbook
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: List installed security updates
+      shell: dnf updateinfo list security installed | awk '{print $1}'
+      register: security_packages
+      changed_when: false
+
+    - name: Display installed security updates
+      debug:
+        msg: "The following security packages were updated: {{ security_packages.stdout_lines }}"
+
+    - name: Confirm rollback of security packages
+      pause:
+        prompt: "Do you want to rollback these security packages? (yes/no)"
+      register: rollback_confirmation
+
+    - name: Validate user response
+      fail:
+        msg: "User declined to roll back the security packages."
+      when: rollback_confirmation.user_input != "yes"
+
+    - name: Rollback each security package to the previous version
+      shell: dnf downgrade -y {{ item }}
+      with_items: "{{ security_packages.stdout_lines }}"
+      register: rollback_result
+
+    - name: Display rollback results
+      debug:
+        msg: "{{ rollback_result.results }}"
+
