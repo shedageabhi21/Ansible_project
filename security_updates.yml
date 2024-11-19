@@ -13,15 +13,6 @@
       debug:
         msg: "{{ security_updates.stdout }}"
 
-    - name: Prompt for confirmation to apply updates
-      pause:
-        prompt: "Do you want to apply the security updates? (yes/no)"
-      register: user_input
-
-    - name: Validate user response
-      fail:
-        msg: "User declined to apply updates."
-      when: user_input.user_input != "yes"
 
     - name: Apply all security updates
       dnf:
