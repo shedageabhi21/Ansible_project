@@ -2,7 +2,7 @@
 - name: Validate and Confgure Redhat Subscription Managr
   hosts: all
   vars_files:
-    - subscription_manager.yml
+    - subscription_manager_crd.yml
   tasks:
     - name: Validate repository sync
       shell: subscription-manager status
