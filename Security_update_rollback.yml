@@ -1,29 +1,24 @@
 ---
-- name: Rollback Specific Security Updates Playbook
+- name: Rollback Security Updates Playbook
   hosts: all
   become: yes
   tasks:
 
-    - name: List installed security updates
-      shell: dnf updateinfo list security installed | awk '{print $1, $2}' 
-      register: security_packages
+    - name: Get the list of recently upgraded security packages
+      shell: |
+        dnf history list upgrades | grep -i security | awk '{print $1, $2}' 
+      register: upgraded_security_packages
       changed_when: false
 
-    - name: Display installed security updates
+    - name: Display upgraded security packages
       debug:
-        msg: "The following security packages were updated: {{ security_packages.stdout_lines }}"
+        msg: "The following security packages were upgraded: {{ upgraded_security_packages.stdout_lines }}"
 
-    - name: Rollback each security package to the previous version
+    - name: Downgrade upgraded security packages
       shell: |
-        # Extract the package name and version
-        pkg_name=$(echo "{{ item }}" | awk '{print $1}')
-        pkg_version=$(dnf history info last | grep -i "Updated:" | grep -oP "(?<=\s)${pkg_name}.*(?=\s)" | awk '{print $2}')
-        if [ -n "$pkg_version" ]; then
-          dnf downgrade -y ${pkg_name}-${pkg_version}
-        else
-          echo "No previous version available for ${pkg_name}"
-        fi
-      with_items: "{{ security_packages.stdout_lines }}"
+        # Downgrade the package if it is part of the security update list
+        dnf downgrade -y {{ item }}
+      with_items: "{{ upgraded_security_packages.stdout_lines }}"
       register: rollback_result
       ignore_errors: yes
 
