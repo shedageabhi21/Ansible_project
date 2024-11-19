@@ -7,8 +7,8 @@
 
 - name: Start and enabled Apache service
   service: httpd
-  state: started
-  enabled: yes
+    state: started
+    enabled: yes
 
 - name: Ensure Firewall is Allowing http traffic
   firewalld:
